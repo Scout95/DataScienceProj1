@@ -88,20 +88,20 @@ class VisualizationModule:
         # Group, sum, and select top N
         sold_by_brand = df.groupby(groupBy)[columnName].sum().nlargest(top_n)
         # Plotting
-        plt.figure(figsize=(12, 6))
+        plt.figure(figsize=(12, 8))
         sold_by_brand.plot(kind="bar", color="skyblue")
         plt.title(titleName)
         plt.xlabel(xlabelName)
         plt.ylabel(yLabelName)
         plt.xticks(rotation=45)
         plt.tight_layout()
-        plt.show()
+       # plt.show()
 
     def plot_sold_quantity_over_time(
         self, perfume_df, title, xlabelTitle, yLabelTitle, legendTitle
     ):
         """
-        This method plots the sold quantity of perfume by brand over time.
+        Method plots the sold quantity of perfume by brand over time.
         How it works:
         - Converts the 'lastUpdated' column to datetime format, coercing errors to NaT.
         - Groups the data by 'brand' and by the date part of 'lastUpdated'.
@@ -124,22 +124,57 @@ class VisualizationModule:
         ...     legendTitle="Brand"
         ... )
         """
-        # Convert 'lastUpdated' to datetime, invalid parsing will be NaT
-        perfume_df["lastUpdated"] = pd.to_datetime(
-            perfume_df["lastUpdated"], errors="coerce"
-        )
+
+        # # Convert 'lastUpdated' to datetime, invalid parsing will be NaT
+        # perfume_df["lastUpdated"] = pd.to_datetime(
+        #     perfume_df["lastUpdated"], errors="coerce"
+        # )
+        # Remove the timezone abbreviation (e.g. "PDT") from the datetime strings
+        perfume_df['lastUpdated_stripped'] = perfume_df['lastUpdated'].str.replace(r'\sPDT$', '', regex=True)
+        # Convert the cleaned strings to datetime without timezone info
+        perfume_df['lastUpdated'] = pd.to_datetime(perfume_df['lastUpdated_stripped'], errors='coerce')
+        # Localize the naive datetime to the correct timezone (e.g., US/Pacific)
+        perfume_df['lastUpdated'] = perfume_df['lastUpdated'].dt.tz_localize('US/Pacific')
+        # Drop the temporary stripped column if no longer needed
+        perfume_df.drop(columns=['lastUpdated_stripped'], inplace=True)
+
         # Group by brand and date (date part only), sum sold quantities
         sold_by_brand_date = (
             perfume_df.groupby(["brand", perfume_df["lastUpdated"].dt.date])["sold"]
             .sum()
             .unstack(level=0)
         )  # unstack brands to columns for plotting
-        plt.figure(figsize=(12, 7))
+        plt.figure(figsize=(12, 8))  
+        # your plotting code here
+        plt.tight_layout()
+        plt.subplots_adjust(bottom=0.2, top=0.9)  # increase bottom and top margins
+       
         sold_by_brand_date.plot(marker="o")
         plt.title(title)
         plt.xlabel(xlabelTitle)
         plt.ylabel(yLabelTitle)
         plt.xticks(rotation=45)
         plt.legend(title=legendTitle)
+
+        leg = plt.legend(loc='best')
+        leg.set_in_layout(False)  # exclude legend from tight_layout calculations
+       
         plt.tight_layout()
-        plt.show()
+        # plt.show()
+
+    def show_all_plots(block=True):
+        """
+        Displays all open matplotlib figures.
+        Parameters:
+        - block (bool): If True (default), blocks code execution until all plot windows are closed.
+            If False, plots are shown but code continues running immediately.
+        Need to call this method after all plots with matplotlib are created.
+        Example:
+            vm.plot_sold_quantity_by_limit(...)
+            vm2.plot_sold_quantity_over_time(...)
+            show_all_plots()
+        This will open all plots simultaneously.
+        """
+        plt.show(block=block)
+    
+

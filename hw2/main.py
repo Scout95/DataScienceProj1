@@ -61,18 +61,18 @@ def main():
     #     figsize=(10, 6), style="seaborn", facecolor="white", title="Price Distribution"
     # )
     subset = filled_by_mean[
-        ["brand", "title", "type", "price", "priceWithCurrency", "type", "sold"]
+        ["brand", "title", "type", "price", "priceWithCurrency", "type", "sold", "lastUpdated"]
     ].dropna()  # Drop NaN values to avoid errors
 
-    # # vm.plot_quantity_by(subset, 'brand', 'sold', 'Total Sold Quantity of Perfume by Brand', 'Brand', 'Sold Quantity')
-    # vm.plot_sold_quantity_by_limit(
-    #     subset,
-    #     "brand",
-    #     "sold",
-    #     "Total Sold Quantity of Perfume by Brand",
-    #     "Brand",
-    #     "Sold Quantity",
-    # )
+    # vm.plot_quantity_by(subset, 'brand', 'sold', 'Total Sold Quantity of Perfume by Brand', 'Brand', 'Sold Quantity')
+    vm.plot_sold_quantity_by_limit(
+        subset,
+        "brand",
+        "sold",
+        "Total Sold Quantity of Perfume by Brand",
+        "Brand",
+        "Sold Quantity",
+    )
 
     # Add linear graphics
     vm.plot_sold_quantity_over_time(
@@ -82,6 +82,10 @@ def main():
         yLabelTitle="Sold Quantity",
         legendTitle="Brand",
     )
+
+    vm.show_all_plots()
+    
+
 
 
 if __name__ == "__main__":
