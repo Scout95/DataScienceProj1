@@ -1,14 +1,16 @@
 from pathlib import Path
 from data_loader import DataLoader
 from data_processing import DataProcessing
+from visualization import VisualizationModule
 from missing_values_handler import MissingValuesHandler
+import matplotlib.pyplot as plt
+from io import StringIO
 import os
 
 
 def main():
     loader = DataLoader()
     base_dir = Path.cwd()  # or Path(__file__).parent
-    # relative_path = os.path.relpath(absolute_path, base_dir)
 
     # # Load data from csv
     print("base_dir:", base_dir)
@@ -49,6 +51,37 @@ def main():
         "------------> Filled missed data by mode (the most common) value: --------->"
     )
     print(filled_by_mode)
+
+    print("-----> The are following columns in Data Frame: ---->")
+    print(filled_by_mean.columns)
+
+    # Add histograms
+    vm = VisualizationModule()
+    # vm = VisualizationModule(
+    #     figsize=(10, 6), style="seaborn", facecolor="white", title="Price Distribution"
+    # )
+    subset = filled_by_mean[
+        ["brand", "title", "type", "price", "priceWithCurrency", "type", "sold"]
+    ].dropna()  # Drop NaN values to avoid errors
+
+    # # vm.plot_quantity_by(subset, 'brand', 'sold', 'Total Sold Quantity of Perfume by Brand', 'Brand', 'Sold Quantity')
+    # vm.plot_sold_quantity_by_limit(
+    #     subset,
+    #     "brand",
+    #     "sold",
+    #     "Total Sold Quantity of Perfume by Brand",
+    #     "Brand",
+    #     "Sold Quantity",
+    # )
+
+    # Add linear graphics
+    vm.plot_sold_quantity_over_time(
+        subset,
+        title="Sold Quantity of Perfume by Brand Over Time",
+        xlabelTitle="Date",
+        yLabelTitle="Sold Quantity",
+        legendTitle="Brand",
+    )
 
 
 if __name__ == "__main__":
