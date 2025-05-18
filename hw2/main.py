@@ -61,7 +61,16 @@ def main():
     #     figsize=(10, 6), style="seaborn", facecolor="white", title="Price Distribution"
     # )
     subset = filled_by_mean[
-        ["brand", "title", "type", "price", "priceWithCurrency", "type", "sold", "lastUpdated"]
+        [
+            "brand",
+            "title",
+            "type",
+            "price",
+            "priceWithCurrency",
+            "type",
+            "sold",
+            "lastUpdated",
+        ]
     ].dropna()  # Drop NaN values to avoid errors
 
     # vm.plot_quantity_by(subset, 'brand', 'sold', 'Total Sold Quantity of Perfume by Brand', 'Brand', 'Sold Quantity')
@@ -83,9 +92,16 @@ def main():
         legendTitle="Brand",
     )
 
-    vm.show_all_plots()
-    
+    # Add scattering plot
+    vm.plot_scatter_sold_by_brand_over_time(
+        subset,
+        title="Scatter Plot of Sold Quantity by Brand Over Time",
+        xlabelTitle="Date",
+        yLabelTitle="Sold Quantity",
+        legendTitle="Brand",
+    )
 
+    vm.show_all_plots()
 
 
 if __name__ == "__main__":
