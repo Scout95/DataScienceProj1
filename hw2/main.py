@@ -56,7 +56,7 @@ def main():
     print(filled_by_mean.columns)
 
     # Add histograms
-    vm = VisualizationModule()
+    vm1 = VisualizationModule()
     # vm = VisualizationModule(
     #     figsize=(10, 6), style="seaborn", facecolor="white", title="Price Distribution"
     # )
@@ -74,7 +74,7 @@ def main():
     ].dropna()  # Drop NaN values to avoid errors
 
     # vm.plot_quantity_by(subset, 'brand', 'sold', 'Total Sold Quantity of Perfume by Brand', 'Brand', 'Sold Quantity')
-    vm.plot_sold_quantity_by_limit(
+    vm1.plot_sold_quantity_by_limit(
         subset,
         "brand",
         "sold",
@@ -82,9 +82,10 @@ def main():
         "Brand",
         "Sold Quantity",
     )
+    vm2 = VisualizationModule()
 
     # Add linear graphics
-    vm.plot_sold_quantity_over_time(
+    vm2.plot_sold_quantity_over_time(
         subset,
         title="Sold Quantity of Perfume by Brand Over Time",
         xlabelTitle="Date",
@@ -92,8 +93,9 @@ def main():
         legendTitle="Brand",
     )
 
+    vm3 = VisualizationModule()
     # Add scattering plot
-    vm.plot_scatter_sold_by_brand_over_time(
+    vm3.plot_scatter_sold_by_brand_over_time(
         subset,
         title="Scatter Plot of Sold Quantity by Brand Over Time",
         xlabelTitle="Date",
@@ -101,7 +103,9 @@ def main():
         legendTitle="Brand",
     )
 
-    vm.show_all_plots()
+    vms = [vm1, vm2, vm3]
+    for vm in vms:
+        vm.show_all_plots()
 
 
 if __name__ == "__main__":

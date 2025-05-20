@@ -5,7 +5,7 @@ from io import StringIO
 
 class VisualizationModule:
     def __init__(self, figsize=(12, 6), style="seaborn", facecolor="white", title=None):
-        self.fig, self.ax = plt.subplots()
+        self.fig, self.ax = plt.subplots(figsize=figsize)  # Set figsize here
         self.plots = {}
 
     def add_histogram(self, data, bins=10, label=None):
@@ -66,7 +66,7 @@ class VisualizationModule:
         grouped_data = (
             csv_data.groupby(groupBy)[columnName].sum().sort_values(ascending=False)
         )
-        plt.figure(figsize=(15, 6))
+        #  plt.figure(figsize=(15, 6))
         grouped_data.plot(kind="bar", color="skyblue")
         plt.title(titleName)
         plt.xlabel(xlabelName)
@@ -88,7 +88,7 @@ class VisualizationModule:
         # Group, sum, and select top N
         sold_by_brand = df.groupby(groupBy)[columnName].sum().nlargest(top_n)
         # Plotting
-        plt.figure(figsize=(12, 8))
+        # plt.figure(figsize=(12, 8))
         sold_by_brand.plot(kind="bar", color="skyblue")
         plt.title(titleName)
         plt.xlabel(xlabelName)
@@ -125,6 +125,16 @@ class VisualizationModule:
         ...     legendTitle="Brand"
         ... )
         """
+        # --- Limit to top 20 brands by total sold quantity ---
+        top_brands = (
+            perfume_df.groupby("brand")["sold"]
+            .sum()
+            .sort_values(ascending=False)
+            .head(20)
+            .index
+        )
+        perfume_df = perfume_df[perfume_df["brand"].isin(top_brands)]
+
         # # Convert 'lastUpdated' to datetime, invalid parsing will be NaT
         # perfume_df["lastUpdated"] = pd.to_datetime(
         #     perfume_df["lastUpdated"], errors="coerce"
@@ -149,24 +159,18 @@ class VisualizationModule:
             perfume_df.groupby(["brand", perfume_df["lastUpdated"].dt.date])["sold"]
             .sum()
             .unstack(level=0)
-        )  # unstack brands to columns for plotting
-        plt.figure(figsize=(12, 8))
-        # your plotting code here
-        plt.tight_layout()
-        plt.subplots_adjust(bottom=0.2, top=0.9)  # increase bottom and top margins
+        )
 
-        sold_by_brand_date.plot(marker="o")
-        plt.title(title)
-        plt.xlabel(xlabelTitle)
-        plt.ylabel(yLabelTitle)
-        plt.xticks(rotation=45)
-        plt.legend(title=legendTitle)
-
-        leg = plt.legend(loc="best")
-        leg.set_in_layout(False)  # exclude legend from tight_layout calculations
-
-        plt.tight_layout()
-        # plt.show()
+        sold_by_brand_date.plot(marker="o", ax=self.ax)  # Use self.ax
+        self.ax.set_title(title, fontsize=12)
+        self.ax.set_xlabel(xlabelTitle, fontsize=10)
+        self.ax.set_ylabel(yLabelTitle, fontsize=10)
+        self.ax.tick_params(axis="x", rotation=45, labelsize=10)
+        self.ax.tick_params(axis="y", labelsize=10)
+        self.ax.legend(
+            title=legendTitle, fontsize=9, title_fontsize=10, loc="upper left"
+        )
+        self.fig.tight_layout()  # Use self.fig
 
     def plot_scatter_sold_by_brand_over_time(
         self, perfume_df, title, xlabelTitle, yLabelTitle, legendTitle
@@ -177,13 +181,13 @@ class VisualizationModule:
             - Iterates over each unique brand and plots sold quantity vs. date as scatter points.
             - Adds plot title, axis labels, legend with specified legend title, and formats x-axis dates.
             - Displays the plot.
-        Parameters:
+            Parameters:
             - csv_data (str): CSV formatted string containing at least 'brand', 'lastUpdated', and 'sold' columns.
             - title (str): Plot title.
             - xlabelTitle (str): Label for x-axis.
             - yLabelTitle (str): Label for y-axis.
             - legendTitle (str): Title for the legend.
-        Example:
+            Example:
             >>> plot_scatter_sold_by_brand_over_time(csv_data,
             ...     title="Scatter Plot of Sold Quantity by Brand Over Time",
             ...     xlabelTitle="Date",
@@ -197,7 +201,7 @@ class VisualizationModule:
         perfume_df = perfume_df.dropna(subset=["lastUpdated", "sold"])
         perfume_df["lastUpdated_naive"] = perfume_df["lastUpdated"].dt.tz_localize(None)
 
-        plt.figure(figsize=(12, 7))
+        #     plt.figure(figsize=(10, 7))
         plt.scatter(perfume_df["lastUpdated_naive"], perfume_df["sold"])
         plt.xlabel("Date")
         plt.ylabel("Sold Quantity")
