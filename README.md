@@ -12,6 +12,9 @@ This python project is created for training purposes
     Create different modules for the work with data: data_loader.py (for CSV, JSON, API), data_processing.py - for handling and 
     transforming data, including some verifications
     -----------------------------------------------
+-> task2: 
+    Create methods for histogram, linear graphic, scattered plot. Implement creation of these graphics
+    -----------------------------------------------
 -> task3: 
     Create method in module for counting empty or missed values in every column of DataFrame and method for printing the report 
     related the missed values
