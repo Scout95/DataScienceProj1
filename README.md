@@ -1,14 +1,14 @@
 # DataScienceProj1
 This python project is created for training purposes
 
-#homeWork1:
+*** #homeWork1: ***
  -> task4:
     Need to create the list that contains all the integer numbers from 1 to 10 using looping and display
      the result on the screen. 
     Solution (for #homeWork1):
     https://github.com/Scout95/DataScienceProj1/blob/master/hw1
 
-#homeWork2:
+*** #homeWork2: ***
  -> task1: 
     Create different modules for the work with data: data_loader.py (for CSV, JSON, API), data_processing.py
      - for handling and 
@@ -23,18 +23,20 @@ This python project is created for training purposes
     related the missed values
     -----------------------------------------------
     For the home task2 was used the following dataset: 
-    Perfume E-Commerce Dataset 2024
+    
+    * Perfume E-Commerce Dataset 2024 *
     https://www.kaggle.com/datasets/kanchana1990/perfume-e-commerce-dataset-2024
     Dataset Overview:
+    
     The Perfume E-Commerce Dataset 2024 comprises detailed information on 2000 perfume listings sourced from eBay,
      split into two separate CSV files for men's and women's perfumes, each containing 1000 entries. This dataset 
      provides a comprehensive view of the current market trends, pricing, availability, and geographical distribution
       of perfumes in the e-commerce space.
 
- Solution (for #homeWork2):
+ *Solution (for #homeWork2):*
  https://github.com/Scout95/DataScienceProj1/tree/master/hw2
 
-***** Observations and conclusions regarding the plots:**********************************************************
+ ** Observations and conclusions regarding the plots:**
 1 plot (histogram) - Total Sold Quantity of Perfume by Brand
  -----------------------------------------------------------
 Calvin Klein is the leader, with a significantly higher sold quantity than any other brand.
