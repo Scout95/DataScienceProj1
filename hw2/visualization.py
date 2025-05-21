@@ -133,6 +133,7 @@ class VisualizationModule:
             .head(20)
             .index
         )
+        perfume_df = perfume_df.copy()
         perfume_df = perfume_df[perfume_df["brand"].isin(top_brands)]
 
         # # Convert 'lastUpdated' to datetime, invalid parsing will be NaT
@@ -195,6 +196,11 @@ class VisualizationModule:
             ...     legendTitle="Brand")
         """
         # Ensure datetime column is parsed and timezone-naive
+        perfume_df = perfume_df.copy()
+        perfume_df.loc[:, "lastUpdated"] = perfume_df["lastUpdated"].str.replace("-", "") #
+
+        perfume_df.loc[:, "lastUpdated"] = perfume_df["lastUpdated"].str.replace(r"\sPDT$", "", regex=True)
+
         perfume_df["lastUpdated"] = pd.to_datetime(
             perfume_df["lastUpdated"], errors="coerce"
         )

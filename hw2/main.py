@@ -13,9 +13,9 @@ def main():
     base_dir = Path.cwd()  # or Path(__file__).parent
 
     # # Load data from csv
-    print("base_dir:", base_dir)
+    #print("base_dir:", base_dir)
     current_dir = os.getcwd()
-    print("current_dir:", current_dir)
+    #print("current_dir:", current_dir)
     path_to_file = os.path.join(base_dir, "hw2/dataset/ebay_womens_perfume.csv")
 
     try:
