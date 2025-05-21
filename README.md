@@ -1,7 +1,7 @@
 # DataScienceProj1
 This python project is created for training purposes
 
-** #homeWork1: **
+#homeWork1:
  -> task4:
     Need to create the list that contains all the integer numbers from 1
      to 10 using looping and display
@@ -9,7 +9,7 @@ This python project is created for training purposes
     Solution (for #homeWork1):
     https://github.com/Scout95/DataScienceProj1/blob/master/hw1
 
-** #homeWork2: **
+#homeWork2:
  -> task1: 
     Create different modules for the work with data: data_loader.py 
     (for CSV, JSON, API), data_processing.py
@@ -40,7 +40,8 @@ This python project is created for training purposes
  https://github.com/Scout95/DataScienceProj1/tree/master/hw2
 
  * Observations and conclusions regarding the plots:*
-1 plot (histogram) - Total Sold Quantity of Perfume by Brand
+
+ 1 plot (histogram) - Total Sold Quantity of Perfume by Brand
  -----------------------------------------------------------
 Calvin Klein is the leader, with a significantly higher sold quantity than any other brand.
 Versace also is a strong player, but with a notable gap from Calvin Klein.
@@ -48,7 +49,7 @@ There is a steep drop-off after these top two brands, with Elizabeth Taylor and 
 The distribution is right-skewed: a few brands dominate sales, while many have relatively low volumes.
 So, the perfume market is highly concentrated among a few brands.
 
-2 plot (linear) - Sold Quantity of Perfume by Brand Over Time
+ 2 plot (linear) - Sold Quantity of Perfume by Brand Over Time
  -----------------------------------------------------------
 Most brands show sporadic sales activity, with spikes rather than steady trends.
 Versace and Calvin Klein show distinct peaks, especially close to the end of the observed period.
@@ -58,7 +59,7 @@ The most likely, sales are not evenly distributed over time; there are bursts, p
 or seasonal demand.
 Monitoring for such spikes can help optimize stock and marketing timing.
 
-3 plot (scattered) - Sold Quantity Over Time (All Brands)
+ 3 plot (scattered) - Sold Quantity Over Time (All Brands)
  ------------------------------------------------------------
 Most data points gropped at low sold quantities, with a few extreme outliers.
 There is a visible increase in both the number and magnitude of sales towards the end of the period.
