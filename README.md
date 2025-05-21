@@ -62,7 +62,7 @@ The most likely, sales are not evenly distributed over time; there are bursts, p
 or seasonal demand.
 Monitoring for such spikes can help optimize stock and marketing timing.
 
-  ####*3 plot (scattered) - Sold Quantity Over Time (All Brands)
+  ### *3 plot (scattered) - Sold Quantity Over Time (All Brands)
  ------------------------------------------------------------
 Most data points gropped at low sold quantities, with a few extreme outliers.
 There is a visible increase in both the number and magnitude of sales towards the end of the period.
