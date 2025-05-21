@@ -1,26 +1,29 @@
 # DataScienceProj1
 This python project is created for training purposes
 
-*** #homeWork1: ***
+** #homeWork1: **
  -> task4:
-    Need to create the list that contains all the integer numbers from 1 to 10 using looping and display
+    Need to create the list that contains all the integer numbers from 1
+     to 10 using looping and display
      the result on the screen. 
     Solution (for #homeWork1):
     https://github.com/Scout95/DataScienceProj1/blob/master/hw1
 
-*** #homeWork2: ***
+** #homeWork2: **
  -> task1: 
-    Create different modules for the work with data: data_loader.py (for CSV, JSON, API), data_processing.py
+    Create different modules for the work with data: data_loader.py 
+    (for CSV, JSON, API), data_processing.py
      - for handling and 
     transforming data, including some verifications
     -----------------------------------------------
 -> task2: 
-    Create methods for histogram, linear graphic, scattered plot. Implement creation of these graphics
+    Create methods for histogram, linear graphic, scattered plot. 
+    Implement creation of these graphics
     -----------------------------------------------
 -> task3: 
-    Create method in module for counting empty or missed values in every column of DataFrame and method for 
-    printing the report 
-    related the missed values
+    Create method in module for counting empty or missed values in
+     every column of DataFrame and method for 
+    printing the report related the missed values
     -----------------------------------------------
     For the home task2 was used the following dataset: 
     
@@ -36,7 +39,7 @@ This python project is created for training purposes
  *Solution (for #homeWork2):*
  https://github.com/Scout95/DataScienceProj1/tree/master/hw2
 
- ** Observations and conclusions regarding the plots:**
+ * Observations and conclusions regarding the plots:*
 1 plot (histogram) - Total Sold Quantity of Perfume by Brand
  -----------------------------------------------------------
 Calvin Klein is the leader, with a significantly higher sold quantity than any other brand.
