@@ -77,16 +77,19 @@ The increase in sales activity towards the end of the period probably, due to th
 Creed Stands Out as a Premium Brand and has the highest median price and the widest price range among all brands.
 Its box is much higher and taller than others, with prices ranging from around $20 up to nearly $275. So, Creed offers
  both entry-level and luxury products, but overall positions itself as a premium brand.
+
 Parfums de Marly, EX NIHILO, and Gwen Stefani Show High Price Variability.These brands have relatively large interquartile ranges (IQRs), indicating significant price diversity within their product lines.
-Brands like Lake&skye, TF, Paco Rabanne, Justin Bieber, Xerjoff, Parfum, Giardini Di Toscana, As Picture Show, Vilhelm Parfumerie, Lomani, and Baby Phat display very narrow boxes or even just a line, indicating little to no price variation.
-These brands offer a single product or products at very similar price points, possibly targeting a specific market segment.
-Jo Malone, Valentino, BYREDO have median prices in the $75–$100 range with moderate variability.
-These brands may be targeting the mid-tier market, balancing affordability and luxury.
-Premium Market:
+
+Brands like Lake&skye, TF, Paco Rabanne, Justin Bieber, Xerjoff, Parfum, Giardini Di Toscana, As Picture Show, Vilhelm Parfumerie, Lomani, and Baby Phat display very narrow boxes or even just a line, indicating little to no price variation. These brands offer a single product or products at very similar price points, possibly targeting a specific market segment.
+
+Jo Malone, Valentino, BYREDO have median prices in the $75–$100 range with moderate variability.So, these brands may be targeting the mid-tier market, balancing affordability and luxury.
+
 Creed dominates the high-end segment, with significant price dispersion. This brand could be the focus for luxury marketing and exclusive campaigns.
-Brand Positioning:
+
 Brands with narrow price ranges (e.g., Lake&skye, TF, Justin Bieber) may benefit from expanding their lineup to cater to broader customer segments.
+
 Brands with high variability (e.g., Parfums de Marly, EX NIHILO) are likely experimenting with both affordable and premium products, appealing to a wider audience.
+
 There is a clear separation between premium (Creed, Parfums de Marly) and mid-range or budget brands. Brands looking to expand could consider introducing products in the under-served price ranges.
 
 
