@@ -103,7 +103,11 @@ def main():
         legendTitle="Brand",
     )
 
-    vms = [vm1, vm2, vm3]
+    vm4 = VisualizationModule()
+    # Add box plot
+    vm4.styled_brand_boxplot(filled_by_mean)
+
+    vms = [vm1, vm2, vm3, vm4]
     for vm in vms:
         vm.show_all_plots()
 

@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 from io import StringIO
 
 
@@ -197,9 +198,13 @@ class VisualizationModule:
         """
         # Ensure datetime column is parsed and timezone-naive
         perfume_df = perfume_df.copy()
-        perfume_df.loc[:, "lastUpdated"] = perfume_df["lastUpdated"].str.replace("-", "") #
+        perfume_df.loc[:, "lastUpdated"] = perfume_df["lastUpdated"].str.replace(
+            "-", ""
+        )  #
 
-        perfume_df.loc[:, "lastUpdated"] = perfume_df["lastUpdated"].str.replace(r"\sPDT$", "", regex=True)
+        perfume_df.loc[:, "lastUpdated"] = perfume_df["lastUpdated"].str.replace(
+            r"\sPDT$", "", regex=True
+        )
 
         perfume_df["lastUpdated"] = pd.to_datetime(
             perfume_df["lastUpdated"], errors="coerce"
@@ -212,6 +217,51 @@ class VisualizationModule:
         plt.xlabel("Date")
         plt.ylabel("Sold Quantity")
         plt.xticks(rotation=45)
+        plt.tight_layout()
+        # plt.show()
+
+    def styled_brand_boxplot(
+        self,
+        perfume_df,
+        price_col="price",
+        brand_col="brand",
+        title="Styled Price Distribution by Brand",
+        n_brands=20,
+    ):
+        """
+        Creates a styled boxplot of price distribution by brand.
+        Args:
+            perfume_df (pd.DataFrame): DataFrame containing the data.
+            price_col (str): Name of the column with price data.
+            brand_col (str): Name of the column with brand data.
+            title (str): Title for the plot.
+        """
+        
+
+        # top_brands = perfume_df[brand_col].value_counts().head(n_brands).index
+        top_brands = perfume_df.groupby(brand_col)[price_col].median().sort_values(ascending=False).head(n_brands).index
+
+        df_filtered = perfume_df[perfume_df[brand_col].isin(top_brands)]
+
+        # plt.figure(figsize=(12, 7))
+        sns.set_theme(style="whitegrid", font_scale=1.3)
+
+        # Create the boxplot
+        ax = sns.boxplot(
+            x=brand_col,
+            y=price_col,
+            data=df_filtered,
+            #palette="pastel",
+            linewidth=2,
+            fliersize=8,  # Outlier marker size
+            boxprops=dict(alpha=0.7),
+        )
+
+        plt.grid(axis="y", linestyle="--", alpha=0.6)
+        plt.title(title, fontsize=18, fontweight="bold")
+        plt.xlabel("Brand", fontsize=15, fontweight="medium")
+        plt.ylabel("Price ($)", fontsize=15, fontweight="medium")
+        plt.xticks(rotation=30, ha="right")
         plt.tight_layout()
         # plt.show()
 
