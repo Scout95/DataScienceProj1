@@ -96,7 +96,7 @@ There is a clear separation between premium (Creed, Parfums de Marly) and mid-ra
 ## ** #homeWork3: 
 ** Task: Create a new database and necessary tables, import data from dataset and insert this data into the created table. Prepare and execute SQL requests and the necessary plots.
 
-For the home work3 task was used the same dataset: 
+The following dataset was used for the home work3 task: 
     
    * Perfume E-Commerce Dataset 2024 *
    https://www.kaggle.com/datasets/kanchana1990/perfume-e-commerce-dataset-2024
@@ -164,6 +164,76 @@ Pricing impacts sales volume but is not the sole factor; other variables like br
 
 ---
 
+## ** #homeWork4: 
+ ** 1. Task6: 
+** Implement min 5 classificators, compare the metrics, select the best classificator for your dataset.
+** Train the model using dataset Credit Card Fraud Detection for fraud operations prediction. Use hyperparametric settings and evaluate results.
+
+The following dataset was used for the home work4 task: 
+    
+   * Credit Card Fraud Detection *
+   https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+    
+ ### * Solution (for #homeWork4):*
+ five classificators: https://github.com/Scout95/DataScienceProj1/tree/master/hw4/fiveClassificators
+ catboost results: https://github.com/Scout95/DataScienceProj1/tree/master/hw4
 
 
+The dataset is highly imbalanced: about 284,315 normal transactions vs. 492 fraudulent ones.
 
+The test set contains 85,443 samples, including 148 fraud cases.
+
+Evaluated five models: CatBoost, AdaBoost, ExtraTrees, QDA, and LightGBM.
+
+Key Metrics Summary
+Model	ROC AUC	Precision (Fraud)	Recall (Fraud)	F1-score (Fraud)	Accuracy
+CatBoost	0.9695	0.95	0.76	0.84	~1.00
+AdaBoost	0.9675	0.74	0.68	0.70	~1.00
+ExtraTrees	0.9339	0.97	0.76	0.85	~1.00
+QDA	0.9609	0.06	0.83	0.11	0.98
+LightGBM	0.8607	0.31	0.66	0.43	~1.00
+Detailed Insights
+CatBoost — Best Balanced Model
+
+Highest ROC AUC (0.97) and excellent balance of precision (0.95) and recall (0.76).
+
+Accurately detects frauds while minimizing false positives.
+
+Recommended as the primary model for fraud detection.
+
+AdaBoost — Good but Less Precise
+
+ROC AUC close to CatBoost.
+
+Lower precision (0.74) and recall (0.68), meaning more false alarms and missed frauds.
+
+Could be useful in an ensemble or when prioritizing recall.
+
+ExtraTrees — High Precision and Good Recall
+
+Precision of 0.97 and recall of 0.76, close to CatBoost’s performance.
+
+Slightly lower ROC AUC (0.93) but still strong.
+
+Good candidate for ensemble methods.
+
+QDA — High Recall, Very Low Precision
+
+High recall (0.83) means many frauds detected.
+
+Very low precision (0.06) indicates many false positives.
+
+Suitable only if missing fraud is unacceptable and false alarms can be tolerated.
+
+LightGBM — Lowest Performance
+
+ROC AUC of 0.86 is significantly lower than others.
+
+Low precision (0.31) and moderate recall (0.66).
+
+Needs further tuning or data preprocessing.
+
+Conclusion:
+Use CatBoost as the main model for fraud detection.
+
+-------------
