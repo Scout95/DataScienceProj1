@@ -180,58 +180,24 @@ The following dataset was used for the home work4 task:
 
 
 The dataset is highly imbalanced: about 284,315 normal transactions vs. 492 fraudulent ones.
+## Model Evaluation and Recommendations
 
-The test set contains 85,443 samples, including 148 fraud cases.
+The dataset exhibits extreme class imbalance, with the minority class representing less than 0.2% of samples. This necessitates careful model selection and metric interpretation.
 
-Evaluated five models: CatBoost, AdaBoost, ExtraTrees, QDA, and LightGBM.
+**Best Performing Models:**
+- **CatBoost** and **ExtraTrees** classifiers demonstrated superior performance, achieving ROC AUC scores above 0.93 and F1-scores around 0.85 on the minority class.
+- These models balance precision and recall effectively, making them suitable for fraud detection or anomaly detection tasks where identifying the minority class is critical.
 
-Key Metrics Summary
-Model	ROC AUC	Precision (Fraud)	Recall (Fraud)	F1-score (Fraud)	Accuracy
-CatBoost	0.9695	0.95	0.76	0.84	~1.00
-AdaBoost	0.9675	0.74	0.68	0.70	~1.00
-ExtraTrees	0.9339	0.97	0.76	0.85	~1.00
-QDA	0.9609	0.06	0.83	0.11	0.98
-LightGBM	0.8607	0.31	0.66	0.43	~1.00
-Detailed Insights
-CatBoost — Best Balanced Model
+**Metric Considerations:**
+- **ROC AUC** is the most reliable metric for evaluating model discrimination on imbalanced data.
+- **F1-score (minority class)** is essential to assess the balance between false positives and false negatives.
+- **Accuracy** is not informative due to the severe class imbalance and should not be used as the primary performance indicator.
 
-Highest ROC AUC (0.97) and excellent balance of precision (0.95) and recall (0.76).
+**Models to Avoid:**
+- **QDA** and **LightGBM** showed poor precision and F1-scores on the minority class, despite reasonable recall or accuracy, making them less suitable for this task.
 
-Accurately detects frauds while minimizing false positives.
-
-Recommended as the primary model for fraud detection.
-
-AdaBoost — Good but Less Precise
-
-ROC AUC close to CatBoost.
-
-Lower precision (0.74) and recall (0.68), meaning more false alarms and missed frauds.
-
-Could be useful in an ensemble or when prioritizing recall.
-
-ExtraTrees — High Precision and Good Recall
-
-Precision of 0.97 and recall of 0.76, close to CatBoost’s performance.
-
-Slightly lower ROC AUC (0.93) but still strong.
-
-Good candidate for ensemble methods.
-
-QDA — High Recall, Very Low Precision
-
-High recall (0.83) means many frauds detected.
-
-Very low precision (0.06) indicates many false positives.
-
-Suitable only if missing fraud is unacceptable and false alarms can be tolerated.
-
-LightGBM — Lowest Performance
-
-ROC AUC of 0.86 is significantly lower than others.
-
-Low precision (0.31) and moderate recall (0.66).
-
-Needs further tuning or data preprocessing.
+**Summary:**
+For imbalanced binary classification problems like this, ensemble methods such as CatBoost and ExtraTrees are recommended. They provide robust detection of the minority class while maintaining high overall accuracy. Evaluation should focus on ROC AUC and minority class F1-score rather than accuracy alone.
 
 Conclusion:
 Use CatBoost as the main model for fraud detection.

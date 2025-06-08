@@ -1,9 +1,10 @@
-# Импорт необходимых библиотек
 import pandas as pd
 import numpy as np
 import os
+import zipfile
 from pathlib import Path
 from data_loader import DataLoader
+import kagglehub
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -13,6 +14,48 @@ from sklearn.ensemble import AdaBoostClassifier, ExtraTreesClassifier
 from catboost import CatBoostClassifier
 from lightgbm import LGBMClassifier
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+
+
+
+def download_dataset():
+    dataset_dir = Path("../dataset")
+    dataset_dir.mkdir(exist_ok=True)
+    zip_path = dataset_dir / "creditcard.zip"
+
+    if not zip_path.exists():
+        print("[INFO] Downloading dataset...")
+        exit_code = os.system(f'kaggle datasets download -d mlg-ulb/creditcardfraud -p "{dataset_dir}" --force')
+        if exit_code != 0:
+            raise RuntimeError("Kaggle dataset download failed.")
+    else:
+        print("[INFO] Dataset zip already exists.")
+
+    return zip_path, dataset_dir
+
+def extract_dataset(zip_path, extract_to):
+    if not (extract_to / "creditcard.csv").exists():
+        print(f"[INFO] Extracting dataset from {zip_path}...")
+        with zipfile.ZipFile(zip_path, "r") as zip_ref:
+            zip_ref.extractall(extract_to)
+        print("[INFO] Extraction complete.")
+    else:
+        print("[INFO] Dataset already extracted.")
+
+
+# def download_and_extract_dataset():
+#     # Download dataset using kaggle CLI
+#     print("[INFO] Downloading dataset from Kaggle...")
+#     os.system(
+#         "kaggle datasets download -d mlg-ulb/creditcardfraud -p ./dataset --force"
+#     )
+
+#     zip_path = Path("./dataset/creditcardfraud.zip")
+#     extract_path = Path("./dataset")
+
+#     print("[INFO] Extracting dataset...")
+#     with zipfile.ZipFile(zip_path, "r") as zip_ref:
+#         zip_ref.extractall(extract_path)
+#     print("[INFO] Dataset extracted.")
 
 
 def load_data(path: str) -> pd.DataFrame:
@@ -30,10 +73,57 @@ def load_data(path: str) -> pd.DataFrame:
 
 
 def main():
-    base_dir = Path.cwd()
-    path_to_file = os.path.join(base_dir, "hw4/dataset/creditcard.csv")
+    try:
+        base_dir = Path(__file__).parent.resolve()  # If running as script
+    except NameError:
+        base_dir = Path(os.getcwd()).resolve()      # If running in notebook
 
-    data = load_data(path_to_file)
+    dataset_dir = base_dir / "../dataset"
+    # try:
+    #     dataset_dir.mkdir(exist_ok=True)
+    #     print(f"'dataset' folder created at: {dataset_dir}")
+    # except Exception as e:
+    #     print(f"Failed to create dataset directory: {e}")
+
+    zip_path = dataset_dir / "creditcardfraud.zip"
+    csv_file = dataset_dir / "creditcard.csv"
+    print(f"'zip_path' folder expected at: {zip_path}")
+    print(f"'csv_file' folder expected at: {csv_file}")
+
+    # Download dataset if ZIP not present
+    if not zip_path.exists():
+        print(f"[ERROR] Dataset zip file not found at {zip_path}. Please download it first.")
+        # download_and_extract_dataset()
+        # download_dataset() #uncomment to download
+    # else:
+    #     print(f"[INFO] Extracting dataset from {zip_path}...")
+    #     with zipfile.ZipFile(zip_path, "r") as zip_ref:
+    #         zip_ref.extractall(dataset_dir)
+    #     print("[INFO] Dataset extracted.")
+
+    # Extract dataset if CSV not present
+    extract_dataset(zip_path, dataset_dir)
+
+    # base_dir = Path.cwd()
+    # path_to_file = os.path.join(base_dir, "hw4/dataset/creditcard.csv")
+    # data = load_data(path_to_file)
+
+    # Download latest version
+    # path = kagglehub.dataset_download("mlg-ulb/creditcardfraud")
+    # print("Path to dataset files:", path)
+    # url = "https://raw.githubusercontent.com/jonwancodes/Credit-Card-Fraud-Detection-Dataset-2023-Analysis/main/creditcard.csv"
+
+
+    # ---
+    # dataset_dir = Path("./dataset")
+    # csv_file = dataset_dir / "creditcard.csv"
+
+    # Download and extract if dataset not exists
+    # if not csv_file.exists():
+    #     download_and_extract_dataset()
+
+    data = load_data(csv_file)
+
     if data is None:
         print("[ERROR] Data loading failed. Exiting.")
         return
