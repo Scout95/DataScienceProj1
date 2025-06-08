@@ -96,7 +96,7 @@ There is a clear separation between premium (Creed, Parfums de Marly) and mid-ra
 ## ** #homeWork3: 
 ** Task: Create a new database and necessary tables, import data from dataset and insert this data into the created table. Prepare and execute SQL requests and the necessary plots.
 
-For the home work3 task was used the same dataset: 
+The following dataset was used for the home work3 task: 
     
    * Perfume E-Commerce Dataset 2024 *
    https://www.kaggle.com/datasets/kanchana1990/perfume-e-commerce-dataset-2024
@@ -164,6 +164,118 @@ Pricing impacts sales volume but is not the sole factor; other variables like br
 
 ---
 
+## ** #homeWork4: 
+ ** 1. Task6: 
+** Implement min 5 classificators, compare the metrics, select the best classificator for your dataset.
+** Train the model using dataset Credit Card Fraud Detection for fraud operations prediction. Use hyperparametric settings and evaluate results.
+
+The following dataset was used for the home work4 task: 
+    
+   * Credit Card Fraud Detection *
+   https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+    
+ ### * Solution (for #homeWork4):*
+ five classificators: https://github.com/Scout95/DataScienceProj1/tree/master/hw4/fiveClassificators
+ catboost results: https://github.com/Scout95/DataScienceProj1/tree/master/hw4
 
 
+The dataset is highly imbalanced: about 284,315 normal transactions vs. 492 fraudulent ones.
+## Model Evaluation and Recommendations
 
+The dataset exhibits extreme class imbalance, with the minority class representing less than 0.2% of samples. This necessitates careful model selection and metric interpretation.
+
+Evaluated five models: CatBoost, AdaBoost, ExtraTrees, QDA, and LightGBM.
+
+**Best Performing Models:**
+- **CatBoost** and **ExtraTrees** classifiers demonstrated superior performance, achieving ROC AUC scores above 0.93 and F1-scores around 0.85 on the minority class.
+- These models balance precision and recall effectively, making them suitable for fraud detection or anomaly detection tasks where identifying the minority class is critical.
+
+**Metric Considerations:**
+- **ROC AUC** is the most reliable metric for evaluating model discrimination on imbalanced data.
+- **F1-score (minority class)** is essential to assess the balance between false positives and false negatives.
+- **Accuracy** is not informative due to the severe class imbalance and should not be used as the primary performance indicator.
+
+**Models to Avoid:**
+- **AdaBoost** — Good but Less Precise, ROC AUC close to CatBoost.
+Lower precision (0.74) and recall (0.68), meaning more false alarms and missed frauds.
+- **QDA** — High Recall, Very Low Precision, High recall (0.83) means many frauds detected. Very low precision (0.06) indicates many false positives.
+- **LightGBM** — Lowest Performance, ROC AUC of 0.86 is significantly lower than others. Low precision (0.31) and moderate recall (0.66).
+**QDA** and **LightGBM** showed poor precision and F1-scores on the minority class, despite reasonable recall or accuracy, making them less suitable for this task.
+
+**Summary:**
+For imbalanced binary classification problems like this, ensemble methods such as CatBoost and ExtraTrees are recommended. They provide robust detection of the minority class while maintaining high overall accuracy. Evaluation should focus on ROC AUC and minority class F1-score rather than accuracy alone.
+
+Conclusion:
+Use **CatBoost** as the main model for fraud detection.
+
+-------------
+
+**Training Model Results:**
+
+1. Data Overview
+Dataset size: 284,807 transactions with 31 features.
+
+Class imbalance:
+
+Legitimate (Class 0): 284,315
+
+Fraudulent (Class 1): 492
+
+Fraudulent transactions make up only ~0.17% of the data.
+
+2. Preprocessing
+Split: 70% train, 30% test, stratified by class.
+
+Scaling: The Amount feature was standardized.
+
+Balancing:
+
+Random undersampling was applied to the training set, resulting in 344 fraud and 344 non-fraud samples (balanced train set).
+
+Test set remained imbalanced to reflect real-world conditions.
+
+3. Model Selection and Optimization
+Algorithm: CatBoost Classifier.
+
+Hyperparameter tuning:
+
+Used Bayesian Optimization to maximize ROC-AUC via 3-fold cross-validation on the balanced training set.
+
+Best found parameters:
+
+depth: 4
+
+iterations: 316
+
+l2_leaf_reg: 10.16
+
+learning_rate: 0.0641
+
+4. Model Training
+Trained on the balanced training set with early stopping.
+
+CatBoost’s internal logs show steady improvement in loss and validation metrics.
+
+5. Model Evaluation
+Optimal threshold selected to maximize precision while maintaining recall ≥ 0.7.
+
+Test set metrics (on imbalanced data):
+
+ROC-AUC: 0.9730
+
+F1-Score (optimal threshold): 0.7298
+
+Precision (optimal threshold): 0.7591
+
+Recall (optimal threshold): 0.7027
+
+Conclusion
+The CatBoost model, optimized with Bayesian hyperparameter search and trained on a balanced dataset, demonstrates strong performance on highly imbalanced real-world data.
+
+High ROC-AUC (0.9730) indicates the model is very good at distinguishing between fraudulent and legitimate transactions.
+
+Precision of 0.76 at Recall 0.70 means that, when the model predicts fraud, it is correct about 76% of the time, while still catching over 70% of all fraud cases.
+
+F1-score of 0.73 shows a good balance between precision and recall at the selected threshold.
+
+Practical implication: The model can be used for real-time fraud detection, prioritizing catching as many fraudulent transactions as possible while keeping false alarms at a manageable level.
