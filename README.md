@@ -279,3 +279,32 @@ Precision of 0.76 at Recall 0.70 means that, when the model predicts fraud, it i
 F1-score of 0.73 shows a good balance between precision and recall at the selected threshold.
 
 Practical implication: The model can be used for real-time fraud detection, prioritizing catching as many fraudulent transactions as possible while keeping false alarms at a manageable level.
+
+---
+
+## ** #homeWork5: 
+ ** 1. Task: 
+** Implement min 5 regressors, compare the metrics, analyze and select the best regressor for your dataset.
+
+The following dataset was used for the home work5 task: 
+    
+   * Credit Card Fraud Detection *
+   https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+    
+ ### * Solution (for #homeWork):*
+ five classificators: https://github.com/Scout95/DataScienceProj1/tree/master/hw5/
+
+## Comparative Analysis and Results Interpretation
+
+### Summary of Regressor Performance
+
+- **Elastic Net** demonstrated the best results across key metrics (lowest MSE and MAE, highest R²), confirming its ability to effectively model data with regularization, prevent overfitting, and account for feature importance.
+- **Ensemble Regressor** also showed high accuracy and stability, only slightly behind Elastic Net, thanks to combining the strengths of several models.
+- **Decision Tree** offers good interpretability and average performance but requires careful tuning to avoid overfitting.
+- **K-Nearest Neighbors** and **Passive-Aggressive Regressor** performed worst due to sensitivity to dimensionality, noise, and class imbalance.
+- **Dummy Regressor** serves as a baseline, showing minimal prediction capability without using any features.
+
+**Conclusion:**  
+For this dataset, **Elastic Net** is the optimal choice due to its superior balance of accuracy, robustness. Ensembles and decision trees can be used to improve interpretability and stability but are inferior in prediction quality.
+
+------
