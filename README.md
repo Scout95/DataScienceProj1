@@ -292,7 +292,7 @@ The following dataset was used for the home work5 task:
    https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
     
  ### * Solution (for #homeWork):*
- five classificators: https://github.com/Scout95/DataScienceProj1/tree/master/hw5/
+  https://github.com/Scout95/DataScienceProj1/tree/master/hw5/
 
 ## Comparative Analysis and Results Interpretation
 
