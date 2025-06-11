@@ -303,13 +303,15 @@ The following dataset was used for the home work5 task:
 - **Decision Tree** offers good interpretability and average performance but requires careful tuning to avoid overfitting.
 - **K-Nearest Neighbors** and **Passive-Aggressive Regressor** performed worst due to sensitivity to dimensionality, noise, and class imbalance.
 - **Dummy Regressor** serves as a baseline, showing minimal prediction capability without using any features.
-	Model	       MSE	      MAE	    R²
-0	KNN	       0.000499	0.000805	 0.711
-1	Ensemble	    0.000653	0.003265	 0.622
-2	DecisionTree 0.000819	0.000819	 0.526
-3	ElasticNet	 0.001136	0.005727	 0.343
-4	Dummy	       0.001729	0.003452	 -0.000
-5	PassiveAggressive	0.002278	0.031504	-0.317
+
+| Model        | MSE      | MAE      | R²  |
+|--------------|----------|----------|-----|
+| KNN          | 0.000499 | 0.000805 | 0.711 |
+| Ensemble     | 0.000653 | 0.003265 | 0.622 |
+| DecisionTree | 0.000819 | 0.000819 | 0.526 |
+| ElasticNet   | 0.001136 | 0.005727 | 0.343 |
+| Dummy        | 0.001729 | 0.003452 | -0.000 |
+| PassiveAggressive | 0.002278 | 0.031504 | -0.317 |
 
 **Conclusion:**  
 For this dataset, **Elastic Net** is the optimal choice due to its superior balance of accuracy, robustness. Ensembles and decision trees can be used to improve interpretability and stability but are inferior in prediction quality.
