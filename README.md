@@ -288,32 +288,45 @@ Practical implication: The model can be used for real-time fraud detection, prio
 
 The following dataset was used for the home work5 task: 
     
-   * Credit Card Fraud Detection *
-   https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+   * Concrete Compressive Strength Regression *
+  https://www.kaggle.com/code/michaelbryantds/concrete-compressive-strength-regression?select=Concrete_Data_Yeh.csv
     
- ### * Solution (for #homeWork):*
+ ### * Solution (for #homeWork5):*
   https://github.com/Scout95/DataScienceProj1/tree/master/hw5/
 
 ## Comparative Analysis and Results Interpretation
 
 ### Summary of Regressor Performance
 
-- **Elastic Net** demonstrated the best results across key metrics (lowest MSE and MAE, highest R²), confirming its ability to effectively model data with regularization, prevent overfitting, and account for feature importance.
-- **Ensemble Regressor** also showed high accuracy and stability, only slightly behind Elastic Net, thanks to combining the strengths of several models.
-- **Decision Tree** offers good interpretability and average performance but requires careful tuning to avoid overfitting.
-- **K-Nearest Neighbors** and **Passive-Aggressive Regressor** performed worst due to sensitivity to dimensionality, noise, and class imbalance.
-- **Dummy Regressor** serves as a baseline, showing minimal prediction capability without using any features.
+## Concrete Compressive Strength Regression
 
-| Model        | MSE      | MAE      | R²  |
-|--------------|----------|----------|-----|
-| KNN          | 0.000499 | 0.000805 | 0.711 |
-| Ensemble     | 0.000653 | 0.003265 | 0.622 |
-| DecisionTree | 0.000819 | 0.000819 | 0.526 |
-| ElasticNet   | 0.001136 | 0.005727 | 0.343 |
-| Dummy        | 0.001729 | 0.003452 | -0.000 |
-| PassiveAggressive | 0.002278 | 0.031504 | -0.317 |
+### Описание задачи
 
-**Conclusion:**  
-For this dataset, **Elastic Net** is the optimal choice due to its superior balance of accuracy, robustness. Ensembles and decision trees can be used to improve interpretability and stability but are inferior in prediction quality.
+Задача — предсказать прочность бетона на сжатие по его составу и возрасту на основе датасета [Concrete_Data_Yeh.csv](https://www.kaggle.com/code/michaelbryantds/concrete-compressive-strength-regression?select=Concrete_Data_Yeh.csv).
+
+### Использованные модели
+
+- DummyRegressor (базовый уровень)
+- PassiveAggressiveRegressor
+- ElasticNet
+- KNeighborsRegressor
+- DecisionTreeRegressor
+- RandomForestRegressor
+- LightGBMRegressor
+- VotingRegressor (ансамбль)
+
+### Оценка качества
+
+Модели сравнивались по метрикам R², MSE и MAE. Лучшие результаты показали ансамблевые методы:
+
+| Model           |   R²  |   MSE  |  MAE  |
+|-----------------|-------|--------|-------|
+| LightGBM        | 0.89  | 27.54  | 3.70  |
+| RandomForest    | 0.88  | 29.85  | 3.74  |
+| VotingRegressor | 0.89  | 29.74  | 4.01  |
+
+### Вывод
+
+**LightGBMRegressor** рекомендован как лучший выбор для задачи предсказания прочности бетона на сжатие: он обеспечивает максимальное качество (R² ≈ 0.89) и минимальные ошибки. RandomForestRegressor также показал высокую эффективность и может быть использован как альтернатива.
 
 ------
