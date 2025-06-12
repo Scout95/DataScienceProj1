@@ -300,9 +300,7 @@ The following dataset was used for the home work5 task:
 
 ## Concrete Compressive Strength Regression
 
-### Описание задачи
-
-Задача — предсказать прочность бетона на сжатие по его составу и возрасту на основе датасета [Concrete_Data_Yeh.csv](https://www.kaggle.com/code/michaelbryantds/concrete-compressive-strength-regression?select=Concrete_Data_Yeh.csv).
+Датасет предназначен для проверки прогноза по прочности бетона на сжатие по его составу и возрасту на основе датасета [Concrete_Data_Yeh.csv] (https://www.kaggle.com/code/michaelbryantds/concrete-compressive-strength-regression?select=Concrete_Data_Yeh.csv).
 
 ### Использованные модели
 
