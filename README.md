@@ -669,26 +669,100 @@ LightGBM:
 
 
 The following dataset was used for the home work6 task: 
-    
-   * Customer Shopping Dataset *
+**Customer Shopping Dataset**
   https://www.kaggle.com/datasets/mehmettahiraslan/customer-shopping-dataset
     
  ### * Solution (for #homeWork6):*
   https://github.com/Scout95/DataScienceProj1/tree/master/hw6/
 
-  About this Dataset
+## About this Dataset
 This dataset contains shopping information from 10 different shopping malls between 2021 and 2023. There is gathered data from various age groups and genders to provide a comprehensive view of shopping habits in Istanbul. The dataset includes essential information such as invoice numbers, customer IDs, age, gender, payment methods, product categories, quantity, price, order dates, and shopping mall locations.
 
-Attribute Information:
+## Attribute Information:
 
-invoice_no: Invoice number. Nominal. A combination of the letter 'I' and a 6-digit integer uniquely assigned to each operation.
-customer_id: Customer number. Nominal. A combination of the letter 'C' and a 6-digit integer uniquely assigned to each operation.
-gender: String variable of the customer's gender.
-age: Positive Integer variable of the customers age.
-category: String variable of the category of the purchased product.
-quantity: The quantities of each product (item) per transaction. Numeric.
-price: Unit price. Numeric. Product price per unit in Turkish Liras (TL).
-payment_method: String variable of the payment method (cash, credit card or debit card) used for the transaction.
-invoice_date: Invoice date. The day when a transaction was generated.
-shopping_mall: String variable of the name of the shopping mall where the transaction was made.
+- invoice_no: Invoice number. Nominal. A combination of the letter 'I' and a 6-digit integer uniquely assigned to each operation.
+- customer_id: Customer number. Nominal. A combination of the letter 'C' and a 6-digit integer uniquely assigned to each operation.
+- gender: String variable of the customer's gender.
+- age: Positive Integer variable of the customers age.
+- category: String variable of the category of the purchased product.
+- quantity: The quantities of each product (item) per transaction. Numeric.
+- price: Unit price. Numeric. Product price per unit in Turkish Liras (TL).
+- payment_method: String variable of the payment method (cash, credit card or debit card) used for the transaction.
+- invoice_date: Invoice date. The day when a transaction was generated.
+- shopping_mall: String variable of the name of the shopping mall where the transaction was made.
 
+## В работе используются методы машинного обучения для сегментации данных:
+
+**Gaussian Mixture Model (GMM)**: Это вероятностный алгоритм кластеризации, который относится к методам машинного обучения без учителя. Он сегментирует данные, определяя принадлежность объектов к кластерам на основе вероятностей.
+
+**Consensus Clustering (Ensemble Clustering)**: Используется функция cluster_ensembles из библиотеки scikit-learn-extra, которая объединяет результаты нескольких кластеризаций для получения более устойчивого и согласованного разбиения данных.
+
+## Реализовано также:
+1. **Soft Voting/Probabilistic Assignment via GMM**
+
+Использует обученную модель ** Gaussian Mixture Model (GMM)** для получения вероятностей принадлежности каждого объекта к каждому кластеру (gmm.predict_proba(X_scaled)).
+
+Для каждого объекта выбирается кластер с максимальной вероятностью (soft voting), и эти метки сохраняются в столбец ensemble_cluster_soft_gmm датафрейма.
+
+Выводится распределение объектов по кластерам (сколько объектов попало в каждый кластер).
+
+Строится scatterplot (UMAP-пространство), где цветом отмечены кластеры, определённые soft voting GMM.
+
+Если найдено более одного кластера, вычисляется silhouette score — метрика качества кластеризации (чем выше, тем лучше разделены кластеры).
+
+Результаты:
+
+Получаю распределение по кластерам на основе вероятностного подхода GMM.
+
+Визуализация кластеров в UMAP-пространстве позволяет оценить их разделимость.
+
+Silhouette score показывает, насколько хорошо объекты разделены между кластерами.
+
+2. **Consensus Functions** from sklearn-extra
+
+Использую библиотеку scikit-learn-extra и функцию cluster_ensembles для объединения результатов разных кластеризаций (ensemble clustering).
+
+Поддерживаются методы CSPA, HGPA, MCLA (в данном случае — CSPA).
+
+На входе - матрица меток кластеров от разных моделей (cluster_labels_matrix), на выходе — итоговые метки кластеров (consensus_labels), которые сохраняются в столбец ensemble_cluster_sklearn_extra.
+
+Выводится распределение по кластерам после консенсус-кластеризации.
+
+Строится scatterplot (UMAP-пространство) с цветовой маркировкой по итоговым меткам кластеров.
+
+Если найдено более одного кластера, вычисляется silhouette score для оценки качества консенсус-кластеризации.
+
+## Результаты:
+
+Получаю итоговые метки кластеров, объединяющие результаты разных алгоритмов кластеризации.
+
+Визуализация и silhouette score позволяют сравнить качество консенсус-кластеризации с другими подходами.
+
+Итоговые выводы
+Код реализует два подхода ансамблирования кластеризации: soft voting через вероятности GMM и consensus clustering через sklearn-extra.
+
+Оба подхода сохраняют метки кластеров в датафрейме, строят визуализации и оценивают качество кластеризации с помощью silhouette score.
+
+Soft voting GMM позволяет учитывать неопределённость в принадлежности кластерам, а consensus clustering агрегирует результаты нескольких моделей для более устойчивого решения.
+
+## Реализованы ансамблевые подходы:
+
+Ансамбль кластеризаций: С помощью функции cluster_ensembles объединяются метки кластеров, полученные разными алгоритмами или разными запусками одного алгоритма. Это позволяет повысить устойчивость и качество итоговой сегментации.
+
+Soft Voting (GMM): Хотя soft voting в данном случае реализован на основе одной модели GMM, он использует вероятностное распределение по кластерам, что позволяет учитывать неопределённость в принадлежности объектов к кластерам.
+
+## Метрика качества кластеризации — silhouette score, 
+вычисляется и выводится а также визуализируется распределение кластеров на двумерном пространстве (UMAP), что позволяет оценить качество разбиения визуально.
+
+## Выводы по результатам сегментации и аномалий
+Код успешно реализовал сегментацию клиентов методом кластеризации (KMeans + UMAP), разделив данные на 5 кластеров. Это видно по таблице средних значений признаков по каждому кластеру, что позволяет интерпретировать и сравнивать группы по возрасту, полу, категориям покупок, способам оплаты, времени и месту совершения покупок. Такой подход помогает выявить сегменты с разными поведенческими и демографическими характеристиками.
+
+Качество кластеризации оценивается метрикой silhouette score (0.325) — это говорит о среднем качестве разделения: кластеры различимы, но есть некоторое пересечение между ними.
+
+Проведена проверка на аномалии тремя методами (Isolation Forest, LOF, One-Class SVM): количество аномалий близко для всех методов (~995–1064). Это позволяет выявить клиентов с нетипичным поведением, что может быть полезно для дальнейшего анализа или для исключения выбросов при построении моделей.
+
+В данных нет пропусков (NaN) и дубликатов (уникальных строк больше 79 тысяч при общем числе ~99 тысяч), что говорит о хорошем качестве исходного массива.
+
+В результате сегментации получены усреднённые профили клиентов по каждому кластеру. Например, можно видеть различия по среднему возрасту, количеству и сумме покупок, а также по вероятности покупки определённых категорий товаров или посещения конкретных торговых центров. Это важно для маркетинга, персонализации предложений и построения портретов целевых групп.
+
+Результаты и профили кластеров сохранены для дальнейшего анализа. Это позволяет использовать сегментацию для практических бизнес-задач: таргетинга, персонализации, выявления новых рыночных ниш.
