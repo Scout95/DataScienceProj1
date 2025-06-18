@@ -1,0 +1,603 @@
+/DataScienceProj1/hw6/main.py
+2025-06-18 22:44:17.833997: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-18 22:44:19.517249: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+[INFO] Data successfully loaded. Size: (99457, 10)
+There are heading and first 5 rows of table:
+  invoice_no customer_id  gender  age  ...    price  payment_method  invoice_date   shopping_mall
+0    I138884     C241288  Female   28  ...  1500.40     Credit Card      5/8/2022          Kanyon
+1    I317333     C111565    Male   21  ...  1800.51      Debit Card    12/12/2021  Forum Istanbul
+2    I127801     C266599    Male   20  ...   300.08            Cash     9/11/2021       Metrocity
+3    I173702     C988172  Female   66  ...  3000.85     Credit Card    16/05/2021    Metropol AVM
+4    I337046     C189076  Female   53  ...    60.60            Cash    24/10/2021          Kanyon
+
+[5 rows x 10 columns]
+
+[STEP] Checking for missing values...
+
+Missing values per column:
+invoice_no        0
+customer_id       0
+gender            0
+age               0
+category          0
+quantity          0
+price             0
+payment_method    0
+invoice_date      0
+shopping_mall     0
+dtype: int64
+Размер датасета: (99457, 10)
+
+Data info:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 99457 entries, 0 to 99456
+Data columns (total 10 columns):
+ #   Column          Non-Null Count  Dtype
+---  ------          --------------  -----
+ 0   invoice_no      99457 non-null  object
+ 1   customer_id     99457 non-null  object
+ 2   gender          99457 non-null  object
+ 3   age             99457 non-null  int64
+ 4   category        99457 non-null  object
+ 5   quantity        99457 non-null  int64
+ 6   price           99457 non-null  float64
+ 7   payment_method  99457 non-null  object
+ 8   invoice_date    99457 non-null  object
+ 9   shopping_mall   99457 non-null  object
+dtypes: float64(1), int64(2), object(7)
+memory usage: 7.6+ MB
+None
+
+Data columns:
+Index(['invoice_no', 'customer_id', 'gender', 'age', 'category', 'quantity',
+       'price', 'payment_method', 'invoice_date', 'shopping_mall'],
+      dtype='object')
+Пропуски по колонкам:
+ invoice_no            0
+customer_id           0
+gender                0
+age                   0
+category              0
+quantity              0
+price                 0
+payment_method        0
+invoice_date      59428
+shopping_mall         0
+dtype: int64
+
+[STEP] Imputing missing number values with median...
+
+[STEP] Imputing missing categorian values with most_frequent...
+Пропуски после заполнения:
+ invoice_no            0
+customer_id           0
+gender                0
+age                   0
+category              0
+quantity              0
+price                 0
+payment_method        0
+invoice_date      59428
+shopping_mall         0
+dtype: int64
+NaN в X перед масштабированием:
+ age                                0
+gender_enc                         0
+total_purchase_amount              0
+quantity                           0
+category_Clothing                  0
+category_Cosmetics                 0
+category_Food & Beverage           0
+category_Shoes                     0
+category_Souvenir                  0
+category_Technology                0
+category_Toys                      0
+payment_method_Credit Card         0
+payment_method_Debit Card          0
+shopping_mall_Emaar Square Mall    0
+shopping_mall_Forum Istanbul       0
+shopping_mall_Istinye Park         0
+shopping_mall_Kanyon               0
+shopping_mall_Mall of Istanbul     0
+shopping_mall_Metrocity            0
+shopping_mall_Metropol AVM         0
+shopping_mall_Viaport Outlet       0
+shopping_mall_Zorlu Center         0
+purchase_month_1.0                 0
+purchase_month_10.0                0
+purchase_month_11.0                0
+purchase_month_12.0                0
+purchase_month_2.0                 0
+purchase_month_3.0                 0
+purchase_month_4.0                 0
+purchase_month_5.0                 0
+purchase_month_6.0                 0
+purchase_month_7.0                 0
+purchase_month_8.0                 0
+purchase_month_9.0                 0
+purchase_dayofweek_0.0             0
+purchase_dayofweek_1.0             0
+purchase_dayofweek_2.0             0
+purchase_dayofweek_3.0             0
+purchase_dayofweek_4.0             0
+purchase_dayofweek_5.0             0
+purchase_dayofweek_6.0             0
+dtype: int64
+NaN после всех преобразований: age                                0
+gender_enc                         0
+total_purchase_amount              0
+quantity                           0
+category_Clothing                  0
+category_Cosmetics                 0
+category_Food & Beverage           0
+category_Shoes                     0
+category_Souvenir                  0
+category_Technology                0
+category_Toys                      0
+payment_method_Credit Card         0
+payment_method_Debit Card          0
+shopping_mall_Emaar Square Mall    0
+shopping_mall_Forum Istanbul       0
+shopping_mall_Istinye Park         0
+shopping_mall_Kanyon               0
+shopping_mall_Mall of Istanbul     0
+shopping_mall_Metrocity            0
+shopping_mall_Metropol AVM         0
+shopping_mall_Viaport Outlet       0
+shopping_mall_Zorlu Center         0
+purchase_month_1.0                 0
+purchase_month_10.0                0
+purchase_month_11.0                0
+purchase_month_12.0                0
+purchase_month_2.0                 0
+purchase_month_3.0                 0
+purchase_month_4.0                 0
+purchase_month_5.0                 0
+purchase_month_6.0                 0
+purchase_month_7.0                 0
+purchase_month_8.0                 0
+purchase_month_9.0                 0
+purchase_dayofweek_0.0             0
+purchase_dayofweek_1.0             0
+purchase_dayofweek_2.0             0
+purchase_dayofweek_3.0             0
+purchase_dayofweek_4.0             0
+purchase_dayofweek_5.0             0
+purchase_dayofweek_6.0             0
+dtype: int64
+age                                0
+gender_enc                         0
+total_purchase_amount              0
+quantity                           0
+category_Clothing                  0
+category_Cosmetics                 0
+category_Food & Beverage           0
+category_Shoes                     0
+category_Souvenir                  0
+category_Technology                0
+category_Toys                      0
+payment_method_Credit Card         0
+payment_method_Debit Card          0
+shopping_mall_Emaar Square Mall    0
+shopping_mall_Forum Istanbul       0
+shopping_mall_Istinye Park         0
+shopping_mall_Kanyon               0
+shopping_mall_Mall of Istanbul     0
+shopping_mall_Metrocity            0
+shopping_mall_Metropol AVM         0
+shopping_mall_Viaport Outlet       0
+shopping_mall_Zorlu Center         0
+purchase_month_1.0                 0
+purchase_month_10.0                0
+purchase_month_11.0                0
+purchase_month_12.0                0
+purchase_month_2.0                 0
+purchase_month_3.0                 0
+purchase_month_4.0                 0
+purchase_month_5.0                 0
+purchase_month_6.0                 0
+purchase_month_7.0                 0
+purchase_month_8.0                 0
+purchase_month_9.0                 0
+purchase_dayofweek_0.0             0
+purchase_dayofweek_1.0             0
+purchase_dayofweek_2.0             0
+purchase_dayofweek_3.0             0
+purchase_dayofweek_4.0             0
+purchase_dayofweek_5.0             0
+purchase_dayofweek_6.0             0
+dtype: int64
+age                                0
+gender_enc                         0
+total_purchase_amount              0
+quantity                           0
+category_Clothing                  0
+category_Cosmetics                 0
+category_Food & Beverage           0
+category_Shoes                     0
+category_Souvenir                  0
+category_Technology                0
+category_Toys                      0
+payment_method_Credit Card         0
+payment_method_Debit Card          0
+shopping_mall_Emaar Square Mall    0
+shopping_mall_Forum Istanbul       0
+shopping_mall_Istinye Park         0
+shopping_mall_Kanyon               0
+shopping_mall_Mall of Istanbul     0
+shopping_mall_Metrocity            0
+shopping_mall_Metropol AVM         0
+shopping_mall_Viaport Outlet       0
+shopping_mall_Zorlu Center         0
+purchase_month_1.0                 0
+purchase_month_10.0                0
+purchase_month_11.0                0
+purchase_month_12.0                0
+purchase_month_2.0                 0
+purchase_month_3.0                 0
+purchase_month_4.0                 0
+purchase_month_5.0                 0
+purchase_month_6.0                 0
+purchase_month_7.0                 0
+purchase_month_8.0                 0
+purchase_month_9.0                 0
+purchase_dayofweek_0.0             0
+purchase_dayofweek_1.0             0
+purchase_dayofweek_2.0             0
+purchase_dayofweek_3.0             0
+purchase_dayofweek_4.0             0
+purchase_dayofweek_5.0             0
+purchase_dayofweek_6.0             0
+dtype: int64
+NaN в X перед масштабированием:
+ age                                0
+gender_enc                         0
+total_purchase_amount              0
+quantity                           0
+category_Clothing                  0
+category_Cosmetics                 0
+category_Food & Beverage           0
+category_Shoes                     0
+category_Souvenir                  0
+category_Technology                0
+category_Toys                      0
+payment_method_Credit Card         0
+payment_method_Debit Card          0
+shopping_mall_Emaar Square Mall    0
+shopping_mall_Forum Istanbul       0
+shopping_mall_Istinye Park         0
+shopping_mall_Kanyon               0
+shopping_mall_Mall of Istanbul     0
+shopping_mall_Metrocity            0
+shopping_mall_Metropol AVM         0
+shopping_mall_Viaport Outlet       0
+shopping_mall_Zorlu Center         0
+purchase_month_1.0                 0
+purchase_month_10.0                0
+purchase_month_11.0                0
+purchase_month_12.0                0
+purchase_month_2.0                 0
+purchase_month_3.0                 0
+purchase_month_4.0                 0
+purchase_month_5.0                 0
+purchase_month_6.0                 0
+purchase_month_7.0                 0
+purchase_month_8.0                 0
+purchase_month_9.0                 0
+purchase_dayofweek_0.0             0
+purchase_dayofweek_1.0             0
+purchase_dayofweek_2.0             0
+purchase_dayofweek_3.0             0
+purchase_dayofweek_4.0             0
+purchase_dayofweek_5.0             0
+purchase_dayofweek_6.0             0
+dtype: int64
+inf в X перед масштабированием:
+ age                                0
+gender_enc                         0
+total_purchase_amount              0
+quantity                           0
+category_Clothing                  0
+category_Cosmetics                 0
+category_Food & Beverage           0
+category_Shoes                     0
+category_Souvenir                  0
+category_Technology                0
+category_Toys                      0
+payment_method_Credit Card         0
+payment_method_Debit Card          0
+shopping_mall_Emaar Square Mall    0
+shopping_mall_Forum Istanbul       0
+shopping_mall_Istinye Park         0
+shopping_mall_Kanyon               0
+shopping_mall_Mall of Istanbul     0
+shopping_mall_Metrocity            0
+shopping_mall_Metropol AVM         0
+shopping_mall_Viaport Outlet       0
+shopping_mall_Zorlu Center         0
+purchase_month_1.0                 0
+purchase_month_10.0                0
+purchase_month_11.0                0
+purchase_month_12.0                0
+purchase_month_2.0                 0
+purchase_month_3.0                 0
+purchase_month_4.0                 0
+purchase_month_5.0                 0
+purchase_month_6.0                 0
+purchase_month_7.0                 0
+purchase_month_8.0                 0
+purchase_month_9.0                 0
+purchase_dayofweek_0.0             0
+purchase_dayofweek_1.0             0
+purchase_dayofweek_2.0             0
+purchase_dayofweek_3.0             0
+purchase_dayofweek_4.0             0
+purchase_dayofweek_5.0             0
+purchase_dayofweek_6.0             0
+dtype: int64
+min/max по признакам:
+ age                                 18.0
+gender_enc                             0
+total_purchase_amount               5.23
+quantity                             1.0
+category_Clothing                  False
+category_Cosmetics                 False
+category_Food & Beverage           False
+category_Shoes                     False
+category_Souvenir                  False
+category_Technology                False
+category_Toys                      False
+payment_method_Credit Card         False
+payment_method_Debit Card          False
+shopping_mall_Emaar Square Mall    False
+shopping_mall_Forum Istanbul       False
+shopping_mall_Istinye Park         False
+shopping_mall_Kanyon               False
+shopping_mall_Mall of Istanbul     False
+shopping_mall_Metrocity            False
+shopping_mall_Metropol AVM         False
+shopping_mall_Viaport Outlet       False
+shopping_mall_Zorlu Center         False
+purchase_month_1.0                 False
+purchase_month_10.0                False
+purchase_month_11.0                False
+purchase_month_12.0                False
+purchase_month_2.0                 False
+purchase_month_3.0                 False
+purchase_month_4.0                 False
+purchase_month_5.0                 False
+purchase_month_6.0                 False
+purchase_month_7.0                 False
+purchase_month_8.0                 False
+purchase_month_9.0                 False
+purchase_dayofweek_0.0             False
+purchase_dayofweek_1.0             False
+purchase_dayofweek_2.0             False
+purchase_dayofweek_3.0             False
+purchase_dayofweek_4.0             False
+purchase_dayofweek_5.0             False
+purchase_dayofweek_6.0             False
+dtype: object age                                   69.0
+gender_enc                               1
+total_purchase_amount              26250.0
+quantity                               5.0
+category_Clothing                     True
+category_Cosmetics                    True
+category_Food & Beverage              True
+category_Shoes                        True
+category_Souvenir                     True
+category_Technology                   True
+category_Toys                         True
+payment_method_Credit Card            True
+payment_method_Debit Card             True
+shopping_mall_Emaar Square Mall       True
+shopping_mall_Forum Istanbul          True
+shopping_mall_Istinye Park            True
+shopping_mall_Kanyon                  True
+shopping_mall_Mall of Istanbul        True
+shopping_mall_Metrocity               True
+shopping_mall_Metropol AVM            True
+shopping_mall_Viaport Outlet          True
+shopping_mall_Zorlu Center            True
+purchase_month_1.0                    True
+purchase_month_10.0                   True
+purchase_month_11.0                   True
+purchase_month_12.0                   True
+purchase_month_2.0                    True
+purchase_month_3.0                    True
+purchase_month_4.0                    True
+purchase_month_5.0                    True
+purchase_month_6.0                    True
+purchase_month_7.0                    True
+purchase_month_8.0                    True
+purchase_month_9.0                    True
+purchase_dayofweek_0.0                True
+purchase_dayofweek_1.0                True
+purchase_dayofweek_2.0                True
+purchase_dayofweek_3.0                True
+purchase_dayofweek_4.0                True
+purchase_dayofweek_5.0                True
+purchase_dayofweek_6.0                True
+dtype: object
+NaN in X_scaled: 0
+X_scaled shape: (99457, 41)
+Уникальных строк: 79085
+NaN in X_scaled: 0
+2025-06-18 22:44:22.967513: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Epoch 1/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 5s 1ms/step - loss: 0.6187 - val_loss: 0.3143
+Epoch 2/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.2896 - val_loss: 0.2458
+Epoch 3/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.2270 - val_loss: 0.1977
+Epoch 4/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.1894 - val_loss: 0.1733
+Epoch 5/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.1634 - val_loss: 0.1523
+Epoch 6/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.1443 - val_loss: 0.1351
+Epoch 7/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.1327 - val_loss: 0.1264
+Epoch 8/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.1253 - val_loss: 0.1232
+Epoch 9/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.1197 - val_loss: 0.1167
+Epoch 10/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.1149 - val_loss: 0.1137
+Epoch 11/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 4s 1ms/step - loss: 0.1108 - val_loss: 0.1068
+Epoch 12/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 4s 1ms/step - loss: 0.1064 - val_loss: 0.1024
+Epoch 13/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.1036 - val_loss: 0.0975
+Epoch 14/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.1004 - val_loss: 0.0988
+Epoch 15/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0980 - val_loss: 0.0955
+Epoch 16/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0946 - val_loss: 0.0915
+Epoch 17/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0925 - val_loss: 0.0882
+Epoch 18/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0903 - val_loss: 0.0891
+Epoch 19/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0882 - val_loss: 0.0858
+Epoch 20/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0852 - val_loss: 0.0881
+Epoch 21/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0844 - val_loss: 0.0832
+Epoch 22/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0821 - val_loss: 0.0799
+Epoch 23/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0802 - val_loss: 0.0769
+Epoch 24/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0779 - val_loss: 0.0762
+Epoch 25/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0764 - val_loss: 0.0752
+Epoch 26/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0745 - val_loss: 0.0713
+Epoch 27/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0721 - val_loss: 0.0738
+Epoch 28/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0708 - val_loss: 0.0681
+Epoch 29/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0699 - val_loss: 0.0698
+Epoch 30/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0688 - val_loss: 0.0659
+Epoch 31/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0669 - val_loss: 0.0648
+Epoch 32/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0649 - val_loss: 0.0750
+Epoch 33/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0640 - val_loss: 0.0694
+Epoch 34/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0625 - val_loss: 0.0723
+Epoch 35/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0621 - val_loss: 0.0592
+Epoch 36/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0605 - val_loss: 0.0592
+Epoch 37/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0599 - val_loss: 0.0565
+Epoch 38/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0574 - val_loss: 0.0544
+Epoch 39/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0555 - val_loss: 0.0544
+Epoch 40/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0540 - val_loss: 0.0503
+Epoch 41/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0531 - val_loss: 0.0636
+Epoch 42/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0543 - val_loss: 0.0474
+Epoch 43/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0500 - val_loss: 0.0517
+Epoch 44/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0493 - val_loss: 0.0501
+Epoch 45/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0472 - val_loss: 0.0516
+Epoch 46/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0470 - val_loss: 0.0461
+Epoch 47/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0457 - val_loss: 0.0470
+Epoch 48/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0442 - val_loss: 0.0443
+Epoch 49/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0439 - val_loss: 0.0414
+Epoch 50/50
+2798/2798 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - loss: 0.0449 - val_loss: 0.0400
+3109/3109 ━━━━━━━━━━━━━━━━━━━━ 2s 601us/step 
+3109/3109 ━━━━━━━━━━━━━━━━━━━━ 2s 544us/step 
+Распределение по сегментам Deep Learning кластеризации:
+deep_cluster
+1    56621
+2    14618
+4    10542
+0     9779
+3     7897
+Name: count, dtype: int64
+3109/3109 ━━━━━━━━━━━━━━━━━━━━ 2s 554us/step 
+Распределение по сегментам Deep Learning кластеризации:
+deep_cluster
+1    56621
+2    14618
+4    10542
+0     9779
+3     7897
+Name: count, dtype: int64
+Silhouette Score (UMAP + KMeans): 0.324
+Аномалии по методам:
+Isolation Forest: 995
+LOF: 995
+One-Class SVM: 1064
+               age  gender_enc  ...  purchase_dayofweek_5.0  purchase_dayofweek_6.0
+cluster                         ...
+0        43.658015    0.465962  ...                0.109004                0.052274
+1        43.354461    0.369160  ...                0.092513                0.043428
+2        43.384204    0.387783  ...                0.063656                0.060985
+3        43.223680    0.385507  ...                0.026431                0.076984
+4        43.550720    0.408499  ...                0.000000                0.035070
+
+[5 rows x 41 columns]
+Результаты сегментации и аномалий сохранены в 'customer_shopping_segmented.csv'
+Exploratory Data Analysis (EDA)
+Колонки в df: 'Index(['invoice_no', 'customer_id', 'gender', 'age', 'quantity', 'price',
+       'invoice_date', 'total_purchase_amount', 'gender_enc',
+       'category_Clothing', 'category_Cosmetics', 'category_Food & Beverage',
+       'category_Shoes', 'category_Souvenir', 'category_Technology',
+       'category_Toys', 'payment_method_Credit Card',
+       'payment_method_Debit Card', 'shopping_mall_Emaar Square Mall',
+       'shopping_mall_Forum Istanbul', 'shopping_mall_Istinye Park',
+       'shopping_mall_Kanyon', 'shopping_mall_Mall of Istanbul',
+       'shopping_mall_Metrocity', 'shopping_mall_Metropol AVM',
+       'shopping_mall_Viaport Outlet', 'shopping_mall_Zorlu Center',
+       'purchase_month_1.0', 'purchase_month_10.0', 'purchase_month_11.0',
+       'purchase_month_12.0', 'purchase_month_2.0', 'purchase_month_3.0',
+       'purchase_month_4.0', 'purchase_month_5.0', 'purchase_month_6.0',
+       'purchase_month_7.0', 'purchase_month_8.0', 'purchase_month_9.0',
+       'purchase_dayofweek_0.0', 'purchase_dayofweek_1.0',
+       'purchase_dayofweek_2.0', 'purchase_dayofweek_3.0',
+       'purchase_dayofweek_4.0', 'purchase_dayofweek_5.0',
+       'purchase_dayofweek_6.0', 'deep_cluster', 'cluster', 'iso_anomaly',
+       'lof_anomaly', 'ocsvm_anomaly', 'payment_method_reconstructed'],
+      dtype='object')'
+Важность признаков для предсказания кластера (пример RandomForest на KMeans)
+Silhouette Scores:
+KMeans: -0.017
+GMM: 0.060
+DBSCAN: 0.326
+
+[Consensus Clustering] Распределение по кластерам (majority vote):
+ensemble_cluster_majority
+1    48809
+0    21889
+3    13693
+2    11844
+4     3222
+Name: count, dtype: int64
+Silhouette Score (Consensus Majority): -0.045
+
+Анализ завершен. Данные очищены, категориальные признаки преобразованы.
+Проведена сегментация клиентов 5 методами.
+Выявлены аномалии тремя методами.
+Визуализированы распределения, кластеры и важность признаков.
+Возможно использовать сегменты для таргетинга и анализ аномалий для контроля качества.
