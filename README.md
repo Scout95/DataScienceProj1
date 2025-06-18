@@ -653,4 +653,42 @@ LightGBM:
 
 **LightGBMRegressor** рекомендован как лучший выбор для задачи предсказания прочности бетона на сжатие: он обеспечивает максимальное качество (R² ≈ 0.921) и минимальные ошибки. 
 
-------
+------------------------------------------------------------
+
+## ** #homeWork6: 
+ ** Финальная работа
+1.	Взять набор данных исходя из ваших интересов.
+2.	Не используйте датасеты, которые вы уже брали.
+3.	Описать колонки, какие характеристики.
+4.	Проведите анализ EDA.
+5.	Провести предварительную обработку данных, если это необходимо (сделать данные понятными для модели машинного обучения: заполнить пропущенные значения, заменить категориальные признаки и т.д.)
+6.	Решить задачу сегментации или анализа временного ряда при помощи не менее 5-ти подходов ML. Составьте ансамбль моделей.
+7.	Решить задачу поиска аномалий.
+8.	Визуализация. Создать графики ошибок прогнозирования, метрик качества обученной модели и важности признаков.
+9.	Результат выполнения финальной работы разместить в гит репозиторий.
+
+
+The following dataset was used for the home work6 task: 
+    
+   * Customer Shopping Dataset *
+  https://www.kaggle.com/datasets/mehmettahiraslan/customer-shopping-dataset
+    
+ ### * Solution (for #homeWork6):*
+  https://github.com/Scout95/DataScienceProj1/tree/master/hw6/
+
+  About this Dataset
+This dataset contains shopping information from 10 different shopping malls between 2021 and 2023. There is gathered data from various age groups and genders to provide a comprehensive view of shopping habits in Istanbul. The dataset includes essential information such as invoice numbers, customer IDs, age, gender, payment methods, product categories, quantity, price, order dates, and shopping mall locations.
+
+Attribute Information:
+
+invoice_no: Invoice number. Nominal. A combination of the letter 'I' and a 6-digit integer uniquely assigned to each operation.
+customer_id: Customer number. Nominal. A combination of the letter 'C' and a 6-digit integer uniquely assigned to each operation.
+gender: String variable of the customer's gender.
+age: Positive Integer variable of the customers age.
+category: String variable of the category of the purchased product.
+quantity: The quantities of each product (item) per transaction. Numeric.
+price: Unit price. Numeric. Product price per unit in Turkish Liras (TL).
+payment_method: String variable of the payment method (cash, credit card or debit card) used for the transaction.
+invoice_date: Invoice date. The day when a transaction was generated.
+shopping_mall: String variable of the name of the shopping mall where the transaction was made.
+
